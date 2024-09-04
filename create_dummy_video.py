@@ -1,3 +1,4 @@
+# imports
 import cv2
 import numpy
 import numpy as np
@@ -12,10 +13,11 @@ for i in range(9,-1,-1):
     numbers_li.append(i)
 print(numbers_li)
 
-# creating a video
+# creating a video object of OpenCV
 fourcc = cv2.VideoWriter_fourcc(*'mp4v') 
 video = cv2.VideoWriter('reverse_numbers_5_fps.mp4', fourcc, fps, (width, height))
 
+# creating a video such that it has numbers between 0 and 9
 for i in range(7):
     for num in numbers_li:
 
@@ -30,10 +32,12 @@ for i in range(7):
         video.write(img)
 video.release()
 
-# rekognition-video/ => ffmpeg -i .\reverse_numbers_4_fps.mp4 -c:v libx264 reverse_numbers_4_fps_h264.mp4
-
-cv2.imshow("img", img)
-
+# cv2.imshow("img", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+
+"""
+The Rekognition API needs H264 encoded input video, hence converting the same using ffmpeg
+>>> rekognition-video/ => ffmpeg -i .\reverse_numbers_4_fps.mp4 -c:v libx264 reverse_numbers_4_fps_h264.mp4
+"""
